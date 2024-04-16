@@ -1,12 +1,12 @@
 // PharmacyHome.js
 import { Button, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../../firebase';
 import { useFocusEffect } from '@react-navigation/native';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
-import ShortageList from '../ShortageList';
+import ShortageList from '../CounselorList';
 
 const PharmacyHome = ({ navigation }) => {
   const [userData, setUserData] = useState(null);
@@ -27,26 +27,26 @@ const PharmacyHome = ({ navigation }) => {
     }
   };
 
-useEffect(() => {
-  fetchUserData();
-}, []);
-
-useFocusEffect(
-  React.useCallback(() => {
+  useEffect(() => {
     fetchUserData();
-  }, [])
-);
+  }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchUserData();
+    }, [])
+  );
 
 
   return (
     <SafeAreaView style={styles.Allcontainer}>
       <Image style={styles.image} source={require("../../assets/doctor.png")} />
       {userData ? (
-      <View style={styles.container}>
-        <Text style={styles.title}>Welcome to your pharmacist home page,</Text>
-        <Text style={styles.title}>{userData.fullName} !</Text>
+        <View style={styles.container}>
+          <Text style={styles.title}>Welcome to your pharmacist home page,</Text>
+          <Text style={styles.title}>{userData.fullName} !</Text>
 
-        <Text style={styles.subTitle}>What would you like to do?</Text>
+          <Text style={styles.subTitle}>What would you like to do?</Text>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.button}
@@ -69,8 +69,8 @@ useFocusEffect(
               <Text style={styles.buttonText}>Shortage List</Text>
             </TouchableOpacity>
           </View>
-      </View>
-       ) : (
+        </View>
+      ) : (
         <Text>Loading...</Text>
       )}
     </SafeAreaView>

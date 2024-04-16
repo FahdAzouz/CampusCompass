@@ -33,10 +33,6 @@ const Register = () => {
       return;
     }
 
-    if (adress.trim() === '') {
-      showToast('Address is required!');
-      return;
-    }
 
     try {
       await createUserWithEmailAndPassword(auth, email, password).then(async () => {
@@ -44,7 +40,6 @@ const Register = () => {
         await setDoc(userDocRef, {
           fullName: fullName,
           companyName: companyName,
-          adress: adress,
           role: selectedRole,
         });
       });
@@ -76,7 +71,6 @@ const Register = () => {
           placeholder="Last Name"
           style={styles.input}
         />
-        <TextInput value={adress} onChangeText={(text) => setAdress(text)} placeholder="Address" style={styles.input} />
         <TextInput value={email} onChangeText={(text) => setEmail(text)} placeholder="Email" style={styles.input} />
         <TextInput
           value={password}

@@ -9,24 +9,24 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import PharmacyHome from './Pharmacist/PharmacyHome';
+import CounselingHome from './Counselor/CounselingHome';
 import ManufacturerHome from './Manufacturer/ManufacturerHome';
 import Profile from './Profile';
 import EditProfile from './EditProfile'
 import OrderHistoryScreen from '../components/Manufacturer/OrderHistoryScreen';
 import NotificationsListScreen from '../components/Manufacturer/NotificationsListScreen';
 import MedicationsListScreen from '../components/Manufacturer/MedicationsListScreen';
-import MakeOrderPage from './Pharmacist/MakeOrderPage';
-import NotificationsList from './Pharmacist/NotificationsList';
-import Search from './Pharmacist/Search';
-import Cart from './Pharmacist/Cart';
+import MakeOrderPage from './Counselor/MakeOrderPage';
+import NotificationsList from './Counselor/NotificationsList';
+import Search from './Counselor/Search';
+import Cart from './Counselor/Cart';
 import { TouchableOpacity, ScrollView } from 'react-native';
 import AddNewMedicineScreen from './Manufacturer/AddNewMedicineScreen';
-import ShortageList from './ShortageList';
+import ShortageList from './CounselorList';
 
 const Tab = createBottomTabNavigator()
-const TabPharmacy = createBottomTabNavigator()
-const TabManufacturer = createBottomTabNavigator()
+const TabStudent = createBottomTabNavigator()
+const TabCounselor = createBottomTabNavigator()
 const screenOptions = {
   tabBarShowLabel: false,
   headerShown: false,
@@ -41,10 +41,10 @@ const screenOptions = {
   }
 }
 
-function PharmacistLayout() {
+function StudentLayout() {
   return (
-    <TabPharmacy.Navigator screenOptions={screenOptions}>
-      <TabPharmacy.Screen options={{
+    <TabStudent.Navigator screenOptions={screenOptions}>
+      <TabStudent.Screen options={{
         tabBarIcon: ({ focused }) => {
           return (
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -52,10 +52,10 @@ function PharmacistLayout() {
             </View>
           )
         }
-      }} name="PharmacyHome"
-        component={PharmacyHome} />
+      }} name="CounselingHome"
+        component={CounselingHome} />
 
-      <TabPharmacy.Screen
+      <TabStudent.Screen
         options={{
           tabBarIcon: ({ focused }) => {
             return (
@@ -68,7 +68,7 @@ function PharmacistLayout() {
         name='Profile'
         component={Profile}
       />
-      <TabPharmacy.Screen
+      <TabStudent.Screen
         options={{
           tabBarIcon: ({ focused }) => {
             return (
@@ -82,21 +82,21 @@ function PharmacistLayout() {
         component={ShortageList}
       />
 
-      <TabPharmacy.Screen options={{
+      <TabStudent.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
             <Icon name='bars' size={24} color={focused ? '#2dbfc5' : 'black'} />
           </View>
         ),
       }} name='Cart' component={Cart} />
-      <TabPharmacy.Screen options={{
+      <TabStudent.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
             <Icon name='bell' size={24} color={focused ? '#2dbfc5' : 'black'} />
           </View>
         ),
       }} name='NotificationsList' component={NotificationsList} />
-      <TabPharmacy.Screen options={{
+      <TabStudent.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
             <Icon name='search' size={24} color={focused ? '#2dbfc5' : 'black'} />
@@ -104,14 +104,14 @@ function PharmacistLayout() {
         ),
       }} name='Search' component={Search} />
       {/* <TabPharmacy.Screen name='MakeOrderPage' component={MakeOrderPage} /> */}
-    </TabPharmacy.Navigator>
+    </TabStudent.Navigator>
   );
 }
 
-function ManufacturerLayout({ navigation }) {
+function CounselorLayout({ navigation }) {
   return (
-    <TabManufacturer.Navigator screenOptions={screenOptions}>
-      <TabManufacturer.Screen
+    <TabCounselor.Navigator screenOptions={screenOptions}>
+      <TabCounselor.Screen
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -122,7 +122,7 @@ function ManufacturerLayout({ navigation }) {
         name='ManufacturerHome'
         component={ManufacturerHome}
       />
-      <TabManufacturer.Screen
+      <TabCounselor.Screen
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -133,7 +133,7 @@ function ManufacturerLayout({ navigation }) {
         name='Profile'
         component={Profile}
       />
-      <TabManufacturer.Screen
+      <TabCounselor.Screen
         options={{
           tabBarIcon: ({ focused }) => {
             return (
@@ -146,28 +146,28 @@ function ManufacturerLayout({ navigation }) {
         name='ShortageList'
         component={ShortageList}
       />
-      <TabManufacturer.Screen options={{
+      <TabCounselor.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
             <Icon name='history' size={24} color={focused ? '#2dbfc5' : 'black'} />
           </View>
         ),
       }} name='OrderHistory' component={OrderHistoryScreen} />
-      <TabManufacturer.Screen options={{
+      <TabCounselor.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
             <Icon name='bell' size={24} color={focused ? '#2dbfc5' : 'black'} />
           </View>
         ),
       }} name='NotificationsList' component={NotificationsListScreen} />
-      <TabManufacturer.Screen options={{
+      <TabCounselor.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
             <Icon name='bars' size={24} color={focused ? '#2dbfc5' : 'black'} />
           </View>
         ),
       }} name='MedicationsList' component={MedicationsListScreen} />
-      <TabManufacturer.Screen
+      <TabCounselor.Screen
         name='AddNewMedicine'
         component={AddNewMedicineScreen}
         options={{
@@ -182,7 +182,7 @@ function ManufacturerLayout({ navigation }) {
         }}
       />
 
-    </TabManufacturer.Navigator>
+    </TabCounselor.Navigator>
   );
 }
 
@@ -221,9 +221,9 @@ const Home = () => {
     <NavigationContainer independent={true}>
       <Tab.Navigator screenOptions={{ tabBarStyle: { display: 'none' } }}>
         {user?.role == "pharmacist" ?
-          (<Tab.Screen name="PharmacistLayout" options={{ headerShown: false }} component={PharmacistLayout} />
+          (<Tab.Screen name="PharmacistLayout" options={{ headerShown: false }} component={StudentLayout} />
           ) : (
-            <Tab.Screen name="ManufacturerLayout" options={{ headerShown: false }} component={ManufacturerLayout} />
+            <Tab.Screen name="ManufacturerLayout" options={{ headerShown: false }} component={CounselorLayout} />
           )}
         <Tab.Screen name="EditProfile" options={{ headerShown: false }} component={EditProfile} />
         <Tab.Screen name="MakeOrderPage" options={{ headerShown: false }} component={MakeOrderPage} />

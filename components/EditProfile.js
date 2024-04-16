@@ -49,7 +49,7 @@ const EditProfile = () => {
     try {
       await setDoc(userDocRef, {
         fullName: fullName,
-        companyName :companyName,
+        companyName: companyName,
         adress: address,
         role: role
       });

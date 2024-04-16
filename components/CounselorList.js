@@ -8,58 +8,17 @@ const ShortageList = () => {
 
   useEffect(() => {
     const rawData = `
-      Pazenir, Paclitaxel
-      Hycamtin, Topotecan
-      Trulicity, Dulaglutide
-      Nulojix, Belatacept
-      Kevzara, Sarilumab
-      Abraxane, Paclitaxel
-      Saxenda, Liraglutide
-      Tresiba, Insulin, Degludec
-      Methotrexate, Methotrexate
-      Victoza, Liraglutide
-      Amoxicillin, Amoxicillin
-      Insuman Rapid Basal and Comb 25, Insulin Human
-      Rybelsus, Semaglutide
-      Visudyne, Verteporfin
-      Ixiaro, Japanese Encephalitis Vaccine Inactivated And Absorbed
-      Metalyse, Tenecteplase
-      Actilyse, Alteplase
-      Menopur, Menotropin
-      Zerbaxa, Ceftolozane / Tazobactam
-      DepoCyte, Cytarabine
-      Ozempic, Semaglutide
-      Fasturtec, Rasburicase
-      Cetrotide, Cetrorelix Acetate
-      Orgalutran, Ganirelix
-      Natpar, Parathyroid Hormone
-      Champix, Varenicline
-      RoActemra, Tocilizumab
-      Vfend, Voriconazole
-      Respreeza, Human Alpha1-Proteinase Inhibitor
-      Nucala, Mepolizumab
-      Cinryze, C1 Inhibitor, Human
-      Tygacil, Tigecycline
-      Maci, Matrix Applied Characterised Autologous Cultured Chondrocytes
-      Cerezyme, Imiglucerase
-      Trisenox, Arsenic Trioxide
-      Arixtra, Fondaparinux Sodium
-      Cinryze, Dibotermin Alfa
-      Inductos, Insulin Human
-      Insuman Basal and Comb 25, Docetaxel
-      Taxotere, Agalsidase Beta
-      Fabrazyme, Insulin Human
-      Inductos, Dibotermin Alfa
-      Xofigo, Radium-223 Dichloride
-      Buccolam, Midazolam
-      Enbrel, Etanercept
-      Increlex, Mecasermin
-      Vistide, Cidofovir
+      Victor Hugo, Family Issues
+      William Shakespeare, Love and Romance
+      Charles Dickens, Social Issues
+      Mark Twain, Adventure
+      Jane Austen, Love and Romance
+      Leo Tolstoy, Violence
     `;
     const rows = rawData.trim().split('\n').map(row => row.trim().split(', '));
     const sortedData = rows.sort((a, b) => a[0].localeCompare(b[0]));
 
-    const dataWithStatus = sortedData.map(item => [item[0], item[1], 'In Shortage']);
+    const dataWithStatus = sortedData.map(item => [item[0], item[1], 'Available']);
     setMedicineData(dataWithStatus);
   }, []);
 
@@ -72,16 +31,16 @@ const ShortageList = () => {
   return (
     <SafeAreaView>
       <View>
-        <Text style={styles.title}>Medicine Shortage List</Text>
+        <Text style={styles.title}>Counselor List</Text>
         <TextInput
           style={styles.searchInput}
-          placeholder="Search for medicine..."
+          placeholder="Search for Counselor..."
           value={searchQuery}
           onChangeText={text => setSearchQuery(text)}
         />
         <View style={styles.tableHeader}>
-          <Text style={styles.tableCell}>Medicine Name</Text>
-          <Text style={styles.tableCell}>Molecule Name</Text>
+          <Text style={styles.tableCell}>Counselor</Text>
+          <Text style={styles.tableCell}>Expertise</Text>
           <Text style={styles.tableCell}>Status</Text>
         </View>
         <FlatList
@@ -133,6 +92,7 @@ const styles = StyleSheet.create({
   tableCell: {
     flex: 1,
     padding: 8,
+    textAlign: 'center',
   },
 });
 

@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../../firebase';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { useFocusEffect } from '@react-navigation/native';
-import ShortageList from '../ShortageList';
+import ShortageList from '../CounselorList';
 
 const ManufacturerHome = ({ navigation }) => {
   const [userData, setUserData] = useState(null);
