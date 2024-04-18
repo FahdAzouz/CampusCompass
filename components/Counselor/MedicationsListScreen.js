@@ -65,12 +65,12 @@ const MedicationsListScreen = () => {
         <Text style={{ color: 'white', fontWeight: 'bold' }}>Add a New Medicine</Text>
       </TouchableOpacity>
 
-      <Text style={styles.title}>Your Medicine List</Text>
+      <Text style={styles.title}>Your Session List</Text>
       <View style={styles.tableHeader}>
-        <Text style={styles.tableCell}>Medicine Name</Text>
-        <Text style={styles.tableCell}>Molecule Name</Text>
-        <Text style={styles.tableCell}>Price</Text>
-        <Text style={styles.tableCell}>Availability</Text>
+        <Text style={styles.tableCell}>Student Name</Text>
+        <Text style={styles.tableCell}>Student School</Text>
+        <Text style={styles.tableCell}>Student Classification</Text>
+        <Text style={styles.tableCell}>Time</Text>
         <Text style={{flex: 0.3,padding: 8 , textAlign: 'center'}}></Text>
       </View>
       <FlatList
@@ -131,7 +131,9 @@ const styles = StyleSheet.create({
   },
   tableCell: {
     flex: 1,
+    borderLeftWidth: 15,
     padding: 8,
+    flexWrap: 'wrap',
   },
 });
 

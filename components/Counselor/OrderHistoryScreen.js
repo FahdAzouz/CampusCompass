@@ -61,7 +61,7 @@ const OrderHistoryScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <Text style={styles.title}>Order History:</Text>
+        <Text style={styles.title}>Booking History:</Text>
         {cartItems.length > 0 ? (
           <View style={{ flex: 1 }}>
             <FlatList style={{ flex: 1 }}
@@ -88,7 +88,7 @@ const OrderHistoryScreen = () => {
             />
           </View>
         ) : (
-          <Text style={styles.emptyText}>You don't have any orders!</Text>
+          <Text style={styles.emptyText}>You don't have any previous booking!</Text>
         )}
 
       </View>

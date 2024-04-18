@@ -55,12 +55,12 @@ const AddNewMedicineScreen = () => {
   return (
     <SafeAreaView style={styles.Allcontainer}>
 
-      <Text style={styles.title}>Add New Medicine</Text>
+      <Text style={styles.title}>Add New Session</Text>
       <View style={styles.container}>
         <View style={styles.inputContainer}>
-          <TextInput value={medicineName} onChangeText={text => setMedicineName(text)} placeholder='Medicine Name' style={styles.input} />
-          <TextInput value={moleculeName} onChangeText={text => setMoleculeName(text)} placeholder='Molecule Name' style={styles.input} />
-          <TextInput value={inStock} onChangeText={text => setInStock(text)} placeholder='Price in $' keyboardType='number-pad' style={styles.input} />
+          <TextInput value={medicineName} onChangeText={text => setMedicineName(text)} placeholder='Name' style={styles.input} />
+          <TextInput value={moleculeName} onChangeText={text => setMoleculeName(text)} placeholder='Date' style={styles.input} />
+          <TextInput value={inStock} onChangeText={text => setInStock(text)} placeholder='Time' keyboardType='number-pad' style={styles.input} />
           <View style={{ borderRadius: 50, backgroundColor: 'white', width: '100' }}>
             <Picker
               selectedValue={selectedAvailability}
@@ -72,14 +72,14 @@ const AddNewMedicineScreen = () => {
           </View>
 
           <TouchableOpacity style={styles.button} onPress={addNewMedicine}>
-            <Text style={styles.buttonText}>Add Medicine</Text>
+            <Text style={styles.buttonText}>Add Session</Text>
           </TouchableOpacity>
         </View>
       </View>
       <View >
         <TouchableOpacity onPress={() => navigation.navigate('MedicationsList')} style={styles.backButton}>
           <Icon name="arrow-left" size={24} color="white" />
-          <Text style={styles.navTitle}>Medications List</Text>
+          <Text style={styles.navTitle}>List</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     paddingHorizontal: 15,
     paddingVertical: 10,
-    borderRadius: 50
+    borderRadius: 20
   },
   buttonContainer: {
     display: 'flex',

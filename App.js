@@ -11,8 +11,8 @@ import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH, FIREBASE_APP } from './firebase';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
-import MedicationsListScreen from './components/Manufacturer/MedicationsListScreen';
-import AddNewMedicineScreen from './components/Manufacturer/AddNewMedicineScreen';
+import MedicationsListScreen from './components/Counselor/MedicationsListScreen';
+import AddNewMedicineScreen from './components/Counselor/AddNewMedicineScreen';
 import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
 
@@ -28,7 +28,6 @@ function InsideLayout() {
       <insideStack.Screen options={{ headerShown: false }} name="Home" component={Home} />
       <insideStack.Screen options={{ headerShown: false }} name="Profile" component={Profile} />
       <insideStack.Screen options={{ headerShown: false }} name="EditProfile" component={EditProfile} />
-      <insideStack.Screen options={{ headerShown: false }} name="MedicationsList" component={MedicationsListScreen} />
       <insideStack.Screen options={{ headerShown: false }} name="AddNewMedicine" component={AddNewMedicineScreen} />
     </insideStack.Navigator>
   );
