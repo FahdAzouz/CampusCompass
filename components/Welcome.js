@@ -35,7 +35,7 @@ const Welcome = () => {
       <Modal animationType="slide" transparent={true} visible={aboutModalVisible}>
         <View style={styles.modalContainer}>
           <ScrollView style={styles.modalContent}>
-            {/* Modal Content Here */}
+            {<Text></Text>/* Modal Content Here */}
             <TouchableOpacity onPress={() => setAboutModalVisible(false)} style={styles.closeButton}>
               <Text style={styles.closeButtonText}>Close</Text>
             </TouchableOpacity>

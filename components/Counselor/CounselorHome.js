@@ -1,4 +1,4 @@
-// ManufacturerHome.js
+// CounslerHome.js
 import { Button, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useState, useEffect } from 'react'
@@ -14,18 +14,6 @@ const ManufacturerHome = ({ navigation }) => {
   const fetchUserData = async () => {
     const db = getFirestore();
     const userDocRef = doc(db, 'users', FIREBASE_AUTH.currentUser.uid);
-
-    try {
-      const userDocSnapshot = await getDoc(userDocRef);
-
-      if (userDocSnapshot.exists()) {
-        setUserData(userDocSnapshot.data());
-      } else {
-        console.error('User document not found in Firestore');
-      }
-    } catch (error) {
-      console.error('Error fetching user data:', error.message);
-    }
   };
 
   useEffect(() => {
@@ -42,38 +30,33 @@ const ManufacturerHome = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.Allcontainer}>
       <Image style={styles.image} source={require("../../assets/doctor.png")} />
-      {userData ? (
-        <View style={styles.container}>
-          <Text style={styles.title}>Welcome to your manufacturer home page,</Text>
-          <Text style={styles.title}>{userData.fullName} !</Text>
+      <View style={styles.container}>
+        <Text style={styles.title}>Welcome to your home page,</Text>
 
-          <Text style={styles.subTitle}>What would you like to do?</Text>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('OrderHistory')}>
-              <Text style={styles.buttonText}>Order History</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('NotificationsList')}>
-              <Text style={styles.buttonText}>Notifications List</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('MedicationsList')}>
-              <Text style={styles.buttonText}>Medications List</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('ShortageList')}>
-              <Text style={styles.buttonText}>Shortage List</Text>
-            </TouchableOpacity>
-          </View>
+        <Text style={styles.subTitle}>What would you like to do?</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('OrderHistory')}>
+            <Text style={styles.buttonText}>Booking History</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('NotificationsList')}>
+            <Text style={styles.buttonText}>Notifications List</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('MedicationsList')}>
+            <Text style={styles.buttonText}>Session List</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('ShortageList')}>
+            <Text style={styles.buttonText}>Counselor List</Text>
+          </TouchableOpacity>
         </View>
-      ) : (
-        <Text>Loading...</Text>
-      )}
+      </View>
     </SafeAreaView>
   );
 };
