@@ -1,99 +1,99 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, FlatList, View, Image, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState, useEffect } from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
+import { FIREBASE_AUTH, FIREBASE_DB } from '../firebase';
+import { getFirestore, collection, getDocs } from 'firebase/firestore'; // Updated import to include collection and getDocs
+import { useFocusEffect } from '@react-navigation/native';
+import { signOut } from 'firebase/auth';
 
-const ShortageList = () => {
-  const [medicineData, setMedicineData] = useState([]);
+const CounselorList = () => {
+  const [sessionData, setSessionData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
+  const fetchSessionData = async () => {
+    const db = getFirestore();
+    const sessionCollectionRef = collection(db, 'sessions'); // Reference to the 'sessions' collection
+    try {
+      const querySnapshot = await getDocs(sessionCollectionRef);
+      const sessions = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setSessionData(sessions); // Store session data in state
+    } catch (error) {
+      console.error('Error fetching session data:', error.message);
+    }
+  };
   useEffect(() => {
-    const rawData = `
-      Victor Hugo, Family Issues
-      William Shakespeare, Love and Romance
-      Charles Dickens, Social Issues
-      Mark Twain, Adventure
-      Jane Austen, Love and Romance
-      Leo Tolstoy, Violence
-    `;
-    const rows = rawData.trim().split('\n').map(row => row.trim().split(', '));
-    const sortedData = rows.sort((a, b) => a[0].localeCompare(b[0]));
-
-    const dataWithStatus = sortedData.map(item => [item[0], item[1], 'Available']);
-    setMedicineData(dataWithStatus);
+    fetchSessionData();
   }, []);
 
-  const filteredData = medicineData.filter(
-    item =>
-      item[0].toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item[1].toLowerCase().includes(searchQuery.toLowerCase())
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchSessionData();
+    }, [])
+  );
+  const renderItem = ({ item }) => (
+    <View style={styles.row}>
+      <Text style={styles.cell}>{item.name}</Text>
+      <Text style={styles.cell}>{item.room}</Text>
+      <Text style={styles.cell}>{item.status}</Text>
+    </View>
   );
 
   return (
-    <SafeAreaView>
-      <View>
-        <Text style={styles.title}>Counselor List</Text>
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search for Counselor..."
-          value={searchQuery}
-          onChangeText={text => setSearchQuery(text)}
-        />
-        <View style={styles.tableHeader}>
-          <Text style={styles.tableCell}>Counselor</Text>
-          <Text style={styles.tableCell}>Expertise</Text>
-          <Text style={styles.tableCell}>Status</Text>
-        </View>
-        <FlatList
-          data={filteredData}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item, index }) => (
-            <View style={styles.tableRow}>
-              <Text style={styles.tableCell}>{item[0]}</Text>
-              <Text style={styles.tableCell}>{item[1]}</Text>
-              <Text style={styles.tableCell}>{item[2]}</Text>
-            </View>
-          )}
-        />
+    <SafeAreaView style={styles.container}>
+      <View style={styles.tableHeader}>
+        <Text style={styles.headerText}>Counselor Name</Text>
+        <Text style={styles.headerText}>Room</Text>
+        <Text style={styles.headerText}>Availability</Text>
       </View>
+      <FlatList
+        data={sessionData}
+        keyExtractor={item => item.id}
+        renderItem={renderItem}
+      />
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 20,
-    marginTop: 50,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginVertical: 10,
-  },
-  searchInput: {
-    height: 40,
-    borderWidth: 1,
-    borderColor: '#2dbfc5',
-    paddingHorizontal: 30,
-    paddingVertical: 10,
-    borderRadius: 50,
-    marginBottom: 10,
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#fff',
   },
   tableHeader: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
+    padding: 10,
+    backgroundColor: '#f4f4f8',
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    paddingHorizontal: 16,
+    borderTopColor: '#ccc',
+    borderBottomColor: '#ccc',
   },
-  tableRow: {
-    flexDirection: 'row',
-    marginBottom: 8,
-    paddingHorizontal: 16,
-  },
-  tableCell: {
+  headerText: {
     flex: 1,
-    padding: 8,
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+    color: '#555',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  row: {
+    flexDirection: 'row',
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+  },
+  cell: {
+    flex: 1,
+    fontSize: 16,
     textAlign: 'center',
   },
 });
 
-export default ShortageList;
+
+export default CounselorList;

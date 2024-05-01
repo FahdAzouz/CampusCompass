@@ -63,6 +63,12 @@ const Profile = () => {
               <Text style={styles.label}>Full Name:</Text>
               <Text style={styles.value}>{userData.fullName}</Text>
             </View>
+            <View style={styles.row}>
+              <Text style={styles.label}>Address:</Text>
+              {userData.address === '' ? (<Text style={styles.value}>N/A</Text>)
+              : (<Text style={styles.value}>{userData.adress}</Text>
+              )}
+            </View>
             <View style={styles.rowLast}>
               <Text style={styles.label}>Role:</Text>
               <Text style={styles.value}>{userData.role}</Text>

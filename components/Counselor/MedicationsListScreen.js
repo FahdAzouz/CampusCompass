@@ -60,9 +60,9 @@ const MedicationsListScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={() => { navigation.navigate('AddNewMedicine') }} style={styles.addButton}>
+      <TouchableOpacity onPress={() => { navigation.navigate('AddNewSession') }} style={styles.addButton}>
         <Icon name="plus" size={20} color="white" />
-        <Text style={{ color: 'white', fontWeight: 'bold' }}>Add a New Medicine</Text>
+        <Text style={{ color: 'white', fontWeight: 'bold' }}>Add a session</Text>
       </TouchableOpacity>
 
       <Text style={styles.title}>Your Session List</Text>

@@ -9,7 +9,6 @@ import Profile from './Profile';
 
 const EditProfile = () => {
   const [fullName, setFullName] = useState('');
-  const [companyName, setCompanyName] = useState('');
   const [address, setAddress] = useState('');
   const [role, setRole] = useState('');
 
@@ -25,8 +24,6 @@ const EditProfile = () => {
       if (userDocSnapshot.exists()) {
         const userData = userDocSnapshot.data();
         setFullName(userData.fullName);
-        setCompanyName(userData.companyName);
-        setAddress(userData.adress);
         setRole(userData.role)
       } else {
         console.error('User document not found in Firestore');
@@ -49,7 +46,6 @@ const EditProfile = () => {
     try {
       await setDoc(userDocRef, {
         fullName: fullName,
-        companyName: companyName,
         adress: address,
         role: role
       });
@@ -70,12 +66,6 @@ const EditProfile = () => {
           placeholder="Full Name"
           value={fullName}
           onChangeText={(text) => setFullName(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Company Name"
-          value={companyName}
-          onChangeText={(text) => setCompanyName(text)}
         />
         <TextInput
           style={styles.input}

@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../../firebase';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { useFocusEffect } from '@react-navigation/native';
-import ShortageList from '../CounselorList';
+import CounselorList from '../CounselorList';
 import { signOut } from 'firebase/auth';
 
 const CounselorHome = ({ navigation }) => {
@@ -42,38 +42,43 @@ const CounselorHome = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.Allcontainer}>
       <Image style={styles.image} source={require("../../assets/doctor.png")} />
-      <View style={styles.container}>
-        <Text style={styles.title}>Welcome to your home page,</Text>
+      {userData ? (
+        <View style={styles.container}>
+          <Text style={styles.title}>Welcome to your home page,</Text>
+          <Text style={styles.title}>{userData.fullName} !</Text>
 
-        <Text style={styles.subTitle}>What would you like to do?</Text>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('OrderHistory')}>
-            <Text style={styles.buttonText}>Booking History</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('NotificationsList')}>
-            <Text style={styles.buttonText}>Notifications List</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('MedicationsList')}>
-            <Text style={styles.buttonText}>Session List</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('ShortageList')}>
-            <Text style={styles.buttonText}>Counselor List</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, { backgroundColor: '#d9534f' }]} // Red button for logout
-            onPress={handleLogout}>
-            <Text style={styles.buttonText}>Logout</Text>
-          </TouchableOpacity>
+          <Text style={styles.subTitle}>What would you like to do?</Text>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('OrderHistory')}>
+              <Text style={styles.buttonText}>Booking History</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('NotificationsList')}>
+              <Text style={styles.buttonText}>Notifications List</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('MedicationsList')}>
+              <Text style={styles.buttonText}>Session List</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('CounselorList')}>
+              <Text style={styles.buttonText}>Counselor List</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, { backgroundColor: '#d9534f' }]} // Red button for logout
+              onPress={handleLogout}>
+              <Text style={styles.buttonText}>Logout</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      ) : (
+        <Text>Loading...</Text>
+      )}
     </SafeAreaView>
   );
 };

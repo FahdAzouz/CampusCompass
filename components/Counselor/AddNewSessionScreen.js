@@ -1,4 +1,4 @@
-//AddNewMedicineScreen.js
+//AddNewSessionScreen.js
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ToastAndroid } from 'react-native';
 import { getFirestore, collection, addDoc, doc, getDoc } from 'firebase/firestore';
@@ -10,10 +10,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { useFocusEffect } from '@react-navigation/native';
 
 
-const AddNewMedicineScreen = () => {
-  const [medicineName, setMedicineName] = useState('');
-  const [moleculeName, setMoleculeName] = useState('');
-  const [inStock, setInStock] = useState('');
+const AddNewSessionScreen = () => {
+  const [name, setName] = useState('');
+  const [date, setDate] = useState('');
+  const [room, setOffice] = useState('');
   const [selectedAvailability, setAvailability] = useState('available');
 
   const navigation = useNavigation()
@@ -22,30 +22,30 @@ const AddNewMedicineScreen = () => {
 
 
   const addNewMedicine = async () => {
-    if (medicineName.trim() === '') {
+    if (name.trim() === '') {
       ToastAndroid.show('Medecine name is required!', ToastAndroid.SHORT);
       return;
     }
-    if (moleculeName.trim() === '') {
+    if (date.trim() === '') {
       ToastAndroid.show('Molecule name is required!', ToastAndroid.SHORT);
       return;
     }
-    if (inStock.trim() === '') {
+    if (room.trim() === '') {
       ToastAndroid.show('Stock is required!', ToastAndroid.SHORT);
       return;
     }
     try {
       const db = getFirestore();
-      const medicineCollection = collection(db, 'medicine');
-      await addDoc(medicineCollection, {
-        medicineName,
-        moleculeName,
-        price: parseInt(inStock),
-        availability: selectedAvailability,
+      const sessionCollection = collection(db, 'sessions');
+      await addDoc(sessionCollection, {
+        name,
+        date,
+        room,
+        status: selectedAvailability,
         userId: user.uid,
       });
       navigation.navigate('MedicationsList')
-      Alert.alert('Success', 'New medicine added successfully');
+      Alert.alert('Success', 'New session added successfully');
     } catch (error) {
       console.error('Error adding new medicine:', error.message);
       Alert.alert('Error', 'Failed to add new medicine');
@@ -57,9 +57,9 @@ const AddNewMedicineScreen = () => {
       <Text style={styles.title}>Add New Session</Text>
       <View style={styles.container}>
         <View style={styles.inputContainer}>
-          <TextInput value={medicineName} onChangeText={text => setMedicineName(text)} placeholder='Name' style={styles.input} />
-          <TextInput value={moleculeName} onChangeText={text => setMoleculeName(text)} placeholder='Date' style={styles.input} />
-          <TextInput value={inStock} onChangeText={text => setInStock(text)} placeholder='Time' keyboardType='number-pad' style={styles.input} />
+          <TextInput value={name} onChangeText={text => setName(text)} placeholder='Name' style={styles.input} />
+          <TextInput value={date} onChangeText={text => setDate(text)} placeholder='Date' style={styles.input} />
+          <TextInput value={room} onChangeText={text => setOffice(text)} placeholder='Room' style={styles.input} />
           <View style={{ borderRadius: 50, backgroundColor: 'white', width: '100' }}>
             <Picker
               selectedValue={selectedAvailability}
@@ -161,4 +161,4 @@ const styles = StyleSheet.create({
     borderRadius: 50
   }
 })
-export default AddNewMedicineScreen;
+export default AddNewSessionScreen;

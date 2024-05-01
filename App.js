@@ -12,7 +12,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH, FIREBASE_APP } from './firebase';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import MedicationsListScreen from './components/Counselor/MedicationsListScreen';
-import AddNewMedicineScreen from './components/Counselor/AddNewMedicineScreen';
+import AddNewSessionScreen from './components/Counselor/AddNewSessionScreen';
 import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
 
@@ -28,7 +28,7 @@ function InsideLayout() {
       <insideStack.Screen options={{ headerShown: false }} name="Home" component={Home} />
       <insideStack.Screen options={{ headerShown: false }} name="Profile" component={Profile} />
       <insideStack.Screen options={{ headerShown: false }} name="EditProfile" component={EditProfile} />
-      <insideStack.Screen options={{ headerShown: false }} name="AddNewMedicine" component={AddNewMedicineScreen} />
+      <insideStack.Screen options={{ headerShown: false }} name="AddNewMedicine" component={AddNewSessionScreen} />
     </insideStack.Navigator>
   );
 }

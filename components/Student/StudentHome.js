@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../../firebase';
 import { useFocusEffect } from '@react-navigation/native';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
-import ShortageList from '../CounselorList';
+import CounselorList from '../CounselorList';
 import { signOut } from 'firebase/auth';
 
 const StudentHome = ({ navigation }) => {
@@ -57,7 +57,7 @@ const StudentHome = ({ navigation }) => {
       <Image style={styles.image} source={require("../../assets/doctor.png")} />
       {userData ? (
         <View style={styles.container}>
-          <Text style={styles.title}>Welcome to your home page,</Text>
+          <Text style={styles.title}>Welcome to your student home page,</Text>
           <Text style={styles.title}>{userData.fullName} !</Text>
 
           <Text style={styles.subTitle}>What would you like to do?</Text>
@@ -79,7 +79,7 @@ const StudentHome = ({ navigation }) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => navigation.navigate('ShortageList')}>
+              onPress={() => navigation.navigate('CounselorList')}>
               <Text style={styles.buttonText}>Shortage List</Text>
             </TouchableOpacity>
             <TouchableOpacity

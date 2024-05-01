@@ -21,7 +21,7 @@ import NotificationsList from './Student/NotificationsList';
 import Search from './Student/Search';
 import Cart from './Student/Cart';
 import { TouchableOpacity, ScrollView } from 'react-native';
-import AddNewMedicineScreen from './Counselor/AddNewMedicineScreen';
+import AddNewSessionScreen from './Counselor/AddNewSessionScreen';
 import CounselorList from './CounselorList';
 
 const Tab = createBottomTabNavigator()
@@ -78,7 +78,7 @@ function StudentLayout() {
             );
           },
         }}
-        name='ShortageList'
+        name='CounselorList'
         component={CounselorList}
       />
       <TabCounselor.Screen options={{
@@ -150,7 +150,7 @@ function CounselorLayout({ navigation }) {
             );
           },
         }}
-        name='ShortageList'
+        name='CounselorList'
         component={CounselorList}
       />
       <TabCounselor.Screen options={{
@@ -176,7 +176,7 @@ function CounselorLayout({ navigation }) {
       }} name='MedicationsList' component={MedicationsListScreen} />
       <TabCounselor.Screen
         name='AddNewMedicine'
-        component={AddNewMedicineScreen}
+        component={AddNewSessionScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <TouchableOpacity

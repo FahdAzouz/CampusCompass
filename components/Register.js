@@ -14,7 +14,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [companyName, setCompanyName] = useState('');
-  const [selectedRole, setSelectedRole] = useState('pharmacist');
+  const [selectedRole, setSelectedRole] = useState('student');
   const auth = FIREBASE_AUTH;
   const navigation = useNavigation();
 
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   input: {
-    backgroundColor: '#AFEEEE',
+    backgroundColor: 'white',
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 50,
