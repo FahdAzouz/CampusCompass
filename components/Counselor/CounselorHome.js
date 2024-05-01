@@ -15,6 +15,18 @@ const CounselorHome = ({ navigation }) => {
   const fetchUserData = async () => {
     const db = getFirestore();
     const userDocRef = doc(db, 'users', FIREBASE_AUTH.currentUser.uid);
+
+    try {
+      const userDocSnapshot = await getDoc(userDocRef);
+
+      if (userDocSnapshot.exists()) {
+        setUserData(userDocSnapshot.data());
+      } else {
+        console.error('User document not found in Firestore');
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error.message);
+    }
   };
 
   useEffect(() => {
