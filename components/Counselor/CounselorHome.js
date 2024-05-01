@@ -56,7 +56,7 @@ const CounselorHome = ({ navigation }) => {
       <Image style={styles.image} source={require("../../assets/doctor.png")} />
       {userData ? (
         <View style={styles.container}>
-          <Text style={styles.title}>Welcome to your home page,</Text>
+          <Text style={styles.title}>Welcome to your Counselor home page,</Text>
           <Text style={styles.title}>{userData.fullName} !</Text>
 
           <Text style={styles.subTitle}>What would you like to do?</Text>

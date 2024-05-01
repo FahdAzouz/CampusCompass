@@ -61,7 +61,7 @@ const OrderHistoryScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <Text style={styles.title}>Booking History:</Text>
+        <Text style={styles.title}>Session History:</Text>
         {cartItems.length > 0 ? (
           <View style={{ flex: 1 }}>
             <FlatList style={{ flex: 1 }}

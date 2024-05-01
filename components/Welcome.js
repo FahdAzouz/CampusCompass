@@ -35,7 +35,10 @@ const Welcome = () => {
       <Modal animationType="slide" transparent={true} visible={aboutModalVisible}>
         <View style={styles.modalContainer}>
           <ScrollView style={styles.modalContent}>
-            {<Text></Text>/* Modal Content Here */}
+            {<div class="about-container">
+              <h1 class="about-heading">About Our Counseling App</h1>
+              <p>Welcome to the University Counseling Center app, designed to support the mental health and wellbeing of our student community. This platform provides easy access to comprehensive mental health resources, appointment bookings, and direct connections to experienced counselors. Whether you're seeking support for academic stress, personal issues, or mental health challenges, our app is here to assist you confidentially and compassionately.</p>
+              </div>/* Modal Content Here */}
             <TouchableOpacity onPress={() => setAboutModalVisible(false)} style={styles.closeButton}>
               <Text style={styles.closeButtonText}>Close</Text>
             </TouchableOpacity>
@@ -141,6 +144,20 @@ const styles = StyleSheet.create({
     borderRadius: 20, // Rounded corners for a modern, friendly look
     overflow: 'hidden', // Ensure the background doesn't bleed outside the border radius
     marginTop: 20, // Space from the top for better layout
+  }
+  .about-container {
+    font-family: Arial, sans-serif; /* Sets the font for the about section */
+    background-color: #f4f4f9; /* Light gray background for the about section */
+    border-radius: 8px; /* Rounded corners for the container */
+    padding: 20px; /* Padding inside the container */
+    margin: 20px; /* Margin around the container */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    line-height: 1.6; /* Increases line spacing for readability */
+  }
+  .about-heading {
+    color: #2a2a72; /* Dark blue color for the heading */
+    font-size: 24px; /* Larger font size for the heading */
+    margin-bottom: 10px; /* Space below the heading */
   }
 });
 

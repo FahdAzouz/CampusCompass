@@ -1,4 +1,4 @@
-// OrderHistory.js
+// CurrentBooking.js
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -8,7 +8,7 @@ import { FIREBASE_AUTH, FIREBASE_DB } from '../../firebase';
 import { useFocusEffect } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const OrderHistory = () => {
+const CurrentBooking = () => {
   const [OrderHistoryItems, setOrderHistoryItems] = useState([]);
   const navigation = useNavigation();
 
@@ -25,7 +25,7 @@ const OrderHistory = () => {
   };
 
   useEffect(() => {
-    // Fetch OrderHistory items from Firebase when the component mounts
+    // Fetch CurrentBooking items from Firebase when the component mounts
     fetchOrderHistoryItems();
   }, []);
 
@@ -45,7 +45,7 @@ const OrderHistory = () => {
       });
       setOrderHistoryItems(items);
     } catch (error) {
-      console.error('Error fetching OrderHistory items:', error.message);
+      console.error('Error fetching CurrentBooking items:', error.message);
     }
   };
 
@@ -73,7 +73,7 @@ const OrderHistory = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <Text style={styles.title}>Order History:</Text>
+        <Text style={styles.title}>Current Booking:</Text>
         {OrderHistoryItems.length > 0 ? (
           <View style={{ flex: 1 }}>
             <FlatList style={{ flex: 1 }}
@@ -105,7 +105,7 @@ const OrderHistory = () => {
             />
           </View>
         ) : (
-          <Text style={styles.emptyText}>Your Order History is empty</Text>
+          <Text style={styles.emptyText}>No Booked Sessions</Text>
         )}
 
       </View>
@@ -179,4 +179,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OrderHistory;
+export default CurrentBooking;

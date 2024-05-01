@@ -19,7 +19,7 @@ import MedicationsListScreen from './Counselor/MedicationsListScreen';
 import MakeOrderPage from './Student/MakeOrderPage';
 import NotificationsList from './Student/NotificationsList';
 import Search from './Student/Search';
-import Cart from './Student/Cart';
+import CurrentBooking from './Student/CurrentBooking';
 import { TouchableOpacity, ScrollView } from 'react-native';
 import AddNewSessionScreen from './Counselor/AddNewSessionScreen';
 import CounselorList from './CounselorList';
@@ -95,7 +95,7 @@ function StudentLayout() {
             <Icon name='bars' size={24} color={focused ? '#2dbfc5' : 'black'} />
           </View>
         ),
-      }} name='Cart' component={Cart} />
+      }} name='CurrentBooking' component={CurrentBooking} />
       <TabStudent.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
