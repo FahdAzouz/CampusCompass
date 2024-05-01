@@ -75,12 +75,12 @@ const StudentHome = ({ navigation }) => {
             <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate('Cart')}>
-              <Text style={styles.buttonText}>Order History</Text>
+              <Text style={styles.buttonText}>Booking History</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate('CounselorList')}>
-              <Text style={styles.buttonText}>Shortage List</Text>
+              <Text style={styles.buttonText}>Counselor List</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.button, { backgroundColor: '#d9534f' }]} // Red button for logout
