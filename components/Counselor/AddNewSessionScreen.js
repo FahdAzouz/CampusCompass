@@ -15,7 +15,6 @@ const AddNewSessionScreen = () => {
   const [date, setDate] = useState('');
   const [room, setOffice] = useState('');
   const [selectedAvailability, setAvailability] = useState('available');
-
   const navigation = useNavigation()
 
   const user = FIREBASE_AUTH.currentUser;
@@ -60,13 +59,13 @@ const AddNewSessionScreen = () => {
           <TextInput value={name} onChangeText={text => setName(text)} placeholder='Name' style={styles.input} />
           <TextInput value={date} onChangeText={text => setDate(text)} placeholder='Date' style={styles.input} />
           <TextInput value={room} onChangeText={text => setOffice(text)} placeholder='Room' style={styles.input} />
-          <View style={{ borderRadius: 50, backgroundColor: 'white', width: '100' }}>
+          <View style={{ borderRadius: 50, backgroundColor: 'white', width: '100%' }}>
             <Picker
               selectedValue={selectedAvailability}
               onValueChange={(itemValue) => setAvailability(itemValue)}
             >
-              <Picker.Item label="Available" value={true} />
-              <Picker.Item label="Unavailable" value={false} />
+              <Picker.Item label="Available" value="Available" />
+              <Picker.Item label="Unavailable" value="Unavailable" />
             </Picker>
           </View>
 
