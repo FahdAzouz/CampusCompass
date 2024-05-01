@@ -1,19 +1,20 @@
 // components/Profile.js
 import React, { useEffect, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../firebase';
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const navigation = useNavigation();
 
   const fetchUserData = async () => {
-    const db = getFirestore();
-    const userDocRef = doc(db, 'users', FIREBASE_AUTH.currentUser.uid);
+    const userDocRef = doc(FIREBASE_DB, 'users', FIREBASE_AUTH.currentUser.uid);
 
     try {
       const userDocSnapshot = await getDoc(userDocRef);
@@ -22,9 +23,13 @@ const Profile = () => {
         setUserData(userDocSnapshot.data());
       } else {
         console.error('User document not found in Firestore');
+        setError('No user data found');
       }
     } catch (error) {
       console.error('Error fetching user data:', error.message);
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -34,6 +39,8 @@ const Profile = () => {
 
   useFocusEffect(
     React.useCallback(() => {
+      setError('');
+      setLoading(true);
       fetchUserData();
     }, [])
   );
@@ -43,7 +50,6 @@ const Profile = () => {
   };
 
   const handleEditProfile = () => {
-    // Navigate to the edit profile screen
     navigation.navigate('EditProfile');
   };
 
@@ -56,14 +62,6 @@ const Profile = () => {
             <View style={styles.row}>
               <Text style={styles.label}>Full Name:</Text>
               <Text style={styles.value}>{userData.fullName}</Text>
-            </View>
-            <View style={styles.row}>
-              <Text style={styles.label}>Company Name:</Text>
-              <Text style={styles.value}>{userData.companyName}</Text>
-            </View>
-            <View style={styles.row}>
-              <Text style={styles.label}>Address:</Text>
-              <Text style={styles.value}>{userData.adress}</Text>
             </View>
             <View style={styles.rowLast}>
               <Text style={styles.label}>Role:</Text>
@@ -85,6 +83,7 @@ const Profile = () => {
     </SafeAreaView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

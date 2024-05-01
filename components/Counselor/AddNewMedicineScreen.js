@@ -54,7 +54,6 @@ const AddNewMedicineScreen = () => {
 
   return (
     <SafeAreaView style={styles.Allcontainer}>
-
       <Text style={styles.title}>Add New Session</Text>
       <View style={styles.container}>
         <View style={styles.inputContainer}>

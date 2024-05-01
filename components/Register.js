@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { doc, setDoc } from 'firebase/firestore';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../firebase';
+import Toast from 'react-native-toast-message';
 
 const Register = () => {
   const db = FIREBASE_DB;
@@ -19,7 +20,7 @@ const Register = () => {
 
   const signUp = async () => {
     if (password !== confirmPassword) {
-      ToastAndroid.show('Passwords do not match!', ToastAndroid.SHORT);
+      Toast.show({ type: 'error', text1: 'Passwords do not match!' });
       return;
     }
 
@@ -28,20 +29,16 @@ const Register = () => {
       return;
     }
 
-    if (companyName.trim() === '') {
-      showToast('Company Name is required!');
-      return;
-    }
-
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password).then(async () => {
-        const userDocRef = doc(db, 'users', FIREBASE_AUTH.currentUser.uid);
-        await setDoc(userDocRef, {
-          fullName: fullName,
-          companyName: companyName,
-          role: selectedRole,
-        });
+      const userCredential = await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
+      const user = userCredential.user;
+      const userDocRef = doc(FIREBASE_DB, 'users', user.uid);
+
+      await setDoc(userDocRef, {
+        fullName: fullName,
+        email: email,
+        role: selectedRole,
       });
 
       showToast('You are registered successfully!');
@@ -52,7 +49,7 @@ const Register = () => {
   };
 
   const showToast = (message) => {
-    ToastAndroid.show(message, ToastAndroid.SHORT);
+    Toast.show({ type: 'error', text1: message });
   };
 
   return (

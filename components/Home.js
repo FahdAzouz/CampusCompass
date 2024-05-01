@@ -9,8 +9,8 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import CounselingHome from './Student/StudentHome';
-import ManufacturerHome from './Counselor/CounselorHome';
+import StudentHome from './Student/StudentHome';
+import CounselorHome from './Counselor/CounselorHome';
 import Profile from './Profile';
 import EditProfile from './EditProfile'
 import OrderHistoryScreen from './Counselor/OrderHistoryScreen';
@@ -53,7 +53,7 @@ function StudentLayout() {
           )
         }
       }} name="CounselingHome"
-        component={CounselingHome} />
+        component={StudentHome} />
 
       <TabStudent.Screen
         options={{
@@ -127,7 +127,7 @@ function CounselorLayout({ navigation }) {
           ),
         }}
         name='ManufacturerHome'
-        component={ManufacturerHome}
+        component={CounselorHome}
       />
       <TabCounselor.Screen
         options={{

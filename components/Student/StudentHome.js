@@ -7,8 +7,9 @@ import { FIREBASE_AUTH, FIREBASE_DB } from '../../firebase';
 import { useFocusEffect } from '@react-navigation/native';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import ShortageList from '../CounselorList';
+import { signOut } from 'firebase/auth';
 
-const PharmacyHome = ({ navigation }) => {
+const StudentHome = ({ navigation }) => {
   const [userData, setUserData] = useState(null);
   const fetchUserData = async () => {
     const db = getFirestore();
@@ -37,13 +38,26 @@ const PharmacyHome = ({ navigation }) => {
     }, [])
   );
 
+  const handleLogout = () => {
+    signOut(FIREBASE_AUTH)
+      .then(() => {
+        // Sign-out successful.
+        navigation.navigate('Welcome'); // Navigate to Welcome screen after logout
+      })
+      .catch((error) => {
+        // An error happened.
+        console.error('Logout error:', error);
+      });
+  };
+
+
 
   return (
     <SafeAreaView style={styles.Allcontainer}>
       <Image style={styles.image} source={require("../../assets/doctor.png")} />
       {userData ? (
         <View style={styles.container}>
-          <Text style={styles.title}>Welcome to your pharmacist home page,</Text>
+          <Text style={styles.title}>Welcome to your home page,</Text>
           <Text style={styles.title}>{userData.fullName} !</Text>
 
           <Text style={styles.subTitle}>What would you like to do?</Text>
@@ -68,6 +82,11 @@ const PharmacyHome = ({ navigation }) => {
               onPress={() => navigation.navigate('ShortageList')}>
               <Text style={styles.buttonText}>Shortage List</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, { backgroundColor: '#d9534f' }]} // Red button for logout
+              onPress={handleLogout}>
+              <Text style={styles.buttonText}>Logout</Text>
+            </TouchableOpacity>
           </View>
         </View>
       ) : (
@@ -77,7 +96,7 @@ const PharmacyHome = ({ navigation }) => {
   );
 };
 
-export default PharmacyHome;
+export default StudentHome;
 
 const styles = StyleSheet.create({
   Allcontainer: {

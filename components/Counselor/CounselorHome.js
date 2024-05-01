@@ -8,8 +8,9 @@ import { FIREBASE_AUTH, FIREBASE_DB } from '../../firebase';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { useFocusEffect } from '@react-navigation/native';
 import ShortageList from '../CounselorList';
+import { signOut } from 'firebase/auth';
 
-const ManufacturerHome = ({ navigation }) => {
+const CounselorHome = ({ navigation }) => {
   const [userData, setUserData] = useState(null);
   const fetchUserData = async () => {
     const db = getFirestore();
@@ -26,6 +27,17 @@ const ManufacturerHome = ({ navigation }) => {
     }, [])
   );
 
+  const handleLogout = () => {
+    signOut(FIREBASE_AUTH)
+      .then(() => {
+        // Sign-out successful.
+        navigation.navigate('Welcome'); // Navigate to Welcome screen after logout
+      })
+      .catch((error) => {
+        // An error happened.
+        console.error('Logout error:', error);
+      });
+  };
 
   return (
     <SafeAreaView style={styles.Allcontainer}>
@@ -55,13 +67,18 @@ const ManufacturerHome = ({ navigation }) => {
             onPress={() => navigation.navigate('ShortageList')}>
             <Text style={styles.buttonText}>Counselor List</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, { backgroundColor: '#d9534f' }]} // Red button for logout
+            onPress={handleLogout}>
+            <Text style={styles.buttonText}>Logout</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
   );
 };
 
-export default ManufacturerHome;
+export default CounselorHome;
 
 const styles = StyleSheet.create({
   Allcontainer: {
