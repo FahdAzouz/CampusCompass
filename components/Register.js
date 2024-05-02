@@ -85,8 +85,8 @@ const Register = () => {
         />
         <View style={styles.pickerContainer}>
           <Picker selectedValue={selectedRole} onValueChange={(itemValue) => setSelectedRole(itemValue)}>
-            <Picker.Item label="Student" value="student" />
-            <Picker.Item label="Counselor" value="counselor" />
+            <Picker.Item label="Student" value="Student" />
+            <Picker.Item label="Counselor" value="Counselor" />
           </Picker>
         </View>
       </View>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'snow', // Changed to snow background color
+    backgroundColor: '#FDF9F6', // Changed to snow background color
   },
   logo: {
     width: 80,
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   buttonText: {
-    color: 'black',
+    color: '#EFCD52',
     fontWeight: 'bold',
   },
   button: {
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 10,
     borderRadius: 50,
-    borderColor: '#2dbfc5',
+    borderColor: '#EFCD52',
     borderWidth: 1,
   },
 });

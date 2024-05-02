@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     display: 'flex',
+    color: 'white',
   },
   profileContainer: {
     flex: 1,
@@ -137,10 +138,10 @@ const styles = StyleSheet.create({
   value: {
     flex: 1,
     fontSize: 16,
-    color: '#555',
+    color: '#416285',
   },
   editProfileButton: {
-    backgroundColor: '#2dbfc5',
+    backgroundColor: '#EFCD52',
     width: '40%',
     paddingVertical: 10,
     borderRadius: 50,

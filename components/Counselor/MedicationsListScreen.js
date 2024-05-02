@@ -60,7 +60,7 @@ const MedicationsListScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={() => { navigation.navigate('AddNewSession') }} style={styles.addButton}>
+      <TouchableOpacity onPress={() => { navigation.navigate('AddNewSessionScreen') }} style={styles.addButton}>
         <Icon name="plus" size={20} color="white" />
         <Text style={{ color: 'white', fontWeight: 'bold' }}>Add a session</Text>
       </TouchableOpacity>
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     margin: 16,
-    backgroundColor: "#2dbfc5",
+    backgroundColor: "#EFCD52",
     marginTop: 30,
   },
   tableHeader: {

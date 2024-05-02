@@ -15,7 +15,7 @@ const Welcome = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.welcome}>
-        <Text style={styles.title}>Welcome To</Text>
+        <Text style={styles.Maintitle}>Welcome To</Text>
         <Image style={styles.image} source={require('../assets/logo.png')} />
         <View style={styles.buttonContainer}>
           <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.button}>
@@ -29,16 +29,17 @@ const Welcome = () => {
           </View>
         </View>
       </View>
-      <TouchableOpacity style={styles.aboutButton} onPress={handleAboutPress}>
+      <TouchableOpacity style={styles.aboutButton} onPress={() => setAboutModalVisible(true)}>
         <Text style={styles.aboutButtonText}>About</Text>
       </TouchableOpacity>
       <Modal animationType="slide" transparent={true} visible={aboutModalVisible}>
         <View style={styles.modalContainer}>
           <ScrollView style={styles.modalContent}>
-            {<div class="about-container">
-              <h1 class="about-heading">About Our Counseling App</h1>
-              <p>Welcome to the University Counseling Center app, designed to support the mental health and wellbeing of our student community. This platform provides easy access to comprehensive mental health resources, appointment bookings, and direct connections to experienced counselors. Whether you're seeking support for academic stress, personal issues, or mental health challenges, our app is here to assist you confidentially and compassionately.</p>
-              </div>/* Modal Content Here */}
+            <Text style={styles.title}>About Our Counseling App</Text>
+            <View style={styles.aboutContent}>
+              <Text style={styles.about}>Welcome to CampusCompass, your dedicated portal for streamlined counseling services at Al Akhawayn University. Designed to support the well-being of our university community (Student, Faculty and Staff).</Text>
+              <Text style={styles.about}>CampusCompass offers an intuitive platform for both students and counselors, facilitating easy access to mental health resources. It is more than just a booking app—it's a gateway to healthier, more fulfilled university life. We are committed to providing a safe, responsive, and supportive environment to help you navigate your time at Al Akhawayn University with confidence and ease.</Text>
+            </View>
             <TouchableOpacity onPress={() => setAboutModalVisible(false)} style={styles.closeButton}>
               <Text style={styles.closeButtonText}>Close</Text>
             </TouchableOpacity>
@@ -51,7 +52,7 @@ const Welcome = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFFAFA', // Ocean Blue Background
+    backgroundColor: 'white', // Ocean Blue Background
     flex: 1,
   },
   welcome: {
@@ -61,8 +62,21 @@ const styles = StyleSheet.create({
     position: 'relative', // Add position property
     top: 30,
   },
+  about: {
+    fontSize: 17,
+
+  },
+  aboutContent: {
+    marginTop: 40,
+    //fontFamily: ,
+  },
   title: {
-    color: '#48CAE4', // Text color for better readability
+    color: '#90E0EF', // Text color for better readability
+    fontWeight: 'bold',
+    fontSize: 30,
+  },
+  Maintitle: {
+    color: '#EFCD52', // Text color for better readability
     fontWeight: 'bold',
     fontSize: 30,
   },
@@ -78,7 +92,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   button: {
-    backgroundColor: '#48CAE4', // Lighter Shade of Ocean Blue for Buttons
+    backgroundColor: '#EFCD52', // Lighter Shade of yellow for Buttons
     width: '60%',
     padding: 15,
     borderRadius: 25,
@@ -95,14 +109,14 @@ const styles = StyleSheet.create({
     gap: 3,
   },
   signupText: {
-    color: '#90E0EF', // Soft Ocean Blue for Sign Up Text
+    color: '#416285', // Soft Ocean Blue for Sign Up Text
   },
   aboutButton: {
     position: 'absolute',
     top: 60,
     right: 16,
     padding: 8,
-    backgroundColor: '#48CAE4',
+    backgroundColor: '#EFCD52', //soft brown
     borderRadius: 50,
     paddingVertical: 12,
     paddingHorizontal: 15,
@@ -124,6 +138,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     maxHeight: '80%',
     width: '80%',
+    fontFamily: 'monospace',
+    fontSize: 30,
+    lineHeight: 50,
   },
   closeButton: {
     backgroundColor: 'white',
@@ -144,20 +161,6 @@ const styles = StyleSheet.create({
     borderRadius: 20, // Rounded corners for a modern, friendly look
     overflow: 'hidden', // Ensure the background doesn't bleed outside the border radius
     marginTop: 20, // Space from the top for better layout
-  }
-  .about-container {
-    font-family: Arial, sans-serif; /* Sets the font for the about section */
-    background-color: #f4f4f9; /* Light gray background for the about section */
-    border-radius: 8px; /* Rounded corners for the container */
-    padding: 20px; /* Padding inside the container */
-    margin: 20px; /* Margin around the container */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
-    line-height: 1.6; /* Increases line spacing for readability */
-  }
-  .about-heading {
-    color: #2a2a72; /* Dark blue color for the heading */
-    font-size: 24px; /* Larger font size for the heading */
-    margin-bottom: 10px; /* Space below the heading */
   }
 });
 

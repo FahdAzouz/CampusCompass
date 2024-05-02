@@ -37,7 +37,8 @@ const AddNewSessionScreen = () => {
       const db = getFirestore();
       const sessionCollection = collection(db, 'sessions');
       await addDoc(sessionCollection, {
-        name,
+        name: name,  // Original name for display
+        name_lower: name.toLowerCase(),  // Lowercase name for searching
         date,
         room,
         status: selectedAvailability,
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
-    backgroundColor: "red"
+    backgroundColor: "#416285"
   },
   navTitle: {
     fontSize: 20,
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   button: {
-    backgroundColor: '#2dbfc5',
+    backgroundColor: '#EFCD52',
     paddingHorizontal: 30,
     paddingVertical: 10,
     borderRadius: 50

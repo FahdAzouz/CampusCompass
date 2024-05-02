@@ -66,10 +66,10 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         borderRadius: 25,
         borderWidth: 1,
-        borderColor: '#d3d3d3', // Soft border color
+        borderColor: '#416285', // Soft border color
     },
     button: {
-        backgroundColor: '#2dbfc5', // Calming button color
+        backgroundColor: '#EFCD52', // Blue button color
         width: '100%',
         padding: 15,
         borderRadius: 25,
@@ -85,12 +85,12 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: 15,
         borderRadius: 25,
-        borderColor: '#2dbfc5',
+        borderColor: '#DBB8AA',
         borderWidth: 1,
         alignItems: 'center',
         marginTop: 10,
     },
     buttonTextOutline: {
-        color: "#2dbfc5",
+        color: "#DBB8AA",
     },
 });

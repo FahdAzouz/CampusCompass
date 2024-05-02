@@ -45,6 +45,7 @@ const CounselorList = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>Edit Profile</Text>
       <View style={styles.tableHeader}>
         <Text style={styles.headerText}>Counselor Name</Text>
         <Text style={styles.headerText}>Room</Text>
@@ -92,6 +93,14 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     textAlign: 'center',
+    color: '#416285',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 30,
+    paddingHorizontal: 20,
   },
 });
 

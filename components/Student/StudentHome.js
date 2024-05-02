@@ -38,23 +38,11 @@ const StudentHome = ({ navigation }) => {
     }, [])
   );
 
-  const handleLogout = () => {
-    signOut(FIREBASE_AUTH)
-      .then(() => {
-        // Sign-out successful.
-        navigation.navigate('Welcome'); // Navigate to Welcome screen after logout
-      })
-      .catch((error) => {
-        // An error happened.
-        console.error('Logout error:', error);
-      });
-  };
-
 
 
   return (
     <SafeAreaView style={styles.Allcontainer}>
-      <Image style={styles.image} source={require("../../assets/doctor.png")} />
+      <Image style={styles.image} source={require("../../assets/home.png")} />
       {userData ? (
         <View style={styles.container}>
           <Text style={styles.title}>Welcome to your student home page,</Text>
@@ -82,11 +70,6 @@ const StudentHome = ({ navigation }) => {
               onPress={() => navigation.navigate('CounselorList')}>
               <Text style={styles.buttonText}>Counselor List</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.button, { backgroundColor: '#d9534f' }]} // Red button for logout
-              onPress={handleLogout}>
-              <Text style={styles.buttonText}>Logout</Text>
-            </TouchableOpacity>
           </View>
         </View>
       ) : (
@@ -104,10 +87,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 1,
+    backgroundColor: 'white',
   },
   image: {
     width: 300,
     height: 300,
+    marginBottom: 50,
   },
   container: {
     display: "flex",
@@ -122,7 +107,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   button: {
-    backgroundColor: '#2dbfc5',
+    backgroundColor: '#EFCD52',
     paddingHorizontal: 80,
     paddingVertical: 10,
     borderRadius: 15,

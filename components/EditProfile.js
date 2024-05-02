@@ -92,10 +92,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginTop: 10,
   },
   form: {
     width: '100%',
+    paddingVertical: 250, //center the form
   },
   input: {
     backgroundColor: 'white',
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   saveButton: {
-    backgroundColor: '#2dbfc5',
+    backgroundColor: '#416285',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 50,

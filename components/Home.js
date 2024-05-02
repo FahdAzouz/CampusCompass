@@ -37,7 +37,7 @@ const screenOptions = {
     left: 0,
     elevation: 0,
     height: 60,
-    background: "white"
+    background: "#EFCD52"
   }
 }
 
@@ -48,7 +48,7 @@ function StudentLayout() {
         tabBarIcon: ({ focused }) => {
           return (
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-              <Icon name='home' size={24} color={focused ? "#2dbfc5" : "black"} />
+              <Icon name='home' size={24} color={focused ? "#EFCD52" : "black"} />
             </View>
           )
         }
@@ -60,7 +60,7 @@ function StudentLayout() {
           tabBarIcon: ({ focused }) => {
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                <Icon name='user' size={24} color={focused ? '#2dbfc5' : 'black'} />
+                <Icon name='user' size={24} color={focused ? '#EFCD52' : 'black'} />
               </View>
             );
           },
@@ -73,7 +73,7 @@ function StudentLayout() {
           tabBarIcon: ({ focused }) => {
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                <Icon name='columns' size={24} color={focused ? '#2dbfc5' : 'black'} />
+                <Icon name='columns' size={24} color={focused ? '#EFCD52' : 'black'} />
               </View>
             );
           },
@@ -84,7 +84,7 @@ function StudentLayout() {
       <TabCounselor.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Icon name='history' size={24} color={focused ? '#2dbfc5' : 'black'} />
+            <Icon name='history' size={24} color={focused ? '#EFCD52' : 'black'} />
           </View>
         ),
       }} name='OrderHistory' component={OrderHistoryScreen} />
@@ -92,21 +92,21 @@ function StudentLayout() {
       <TabStudent.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Icon name='bars' size={24} color={focused ? '#2dbfc5' : 'black'} />
+            <Icon name='bars' size={24} color={focused ? '#EFCD52' : 'black'} />
           </View>
         ),
       }} name='CurrentBooking' component={CurrentBooking} />
       <TabStudent.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Icon name='bell' size={24} color={focused ? '#2dbfc5' : 'black'} />
+            <Icon name='bell' size={24} color={focused ? '#EFCD52' : 'black'} />
           </View>
         ),
       }} name='NotificationsList' component={NotificationsList} />
       <TabStudent.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Icon name='search' size={24} color={focused ? '#2dbfc5' : 'black'} />
+            <Icon name='search' size={24} color={focused ? '#EFCD52' : 'black'} />
           </View>
         ),
       }} name='Search' component={Search} />
@@ -122,7 +122,7 @@ function CounselorLayout({ navigation }) {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-              <Icon name='home' size={24} color={focused ? '#2dbfc5' : 'black'} />
+              <Icon name='home' size={24} color={focused ? '#EFCD52' : 'black'} />
             </View>
           ),
         }}
@@ -133,7 +133,7 @@ function CounselorLayout({ navigation }) {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-              <Icon name='user' size={24} color={focused ? '#2dbfc5' : 'black'} />
+              <Icon name='user' size={24} color={focused ? '#EFCD52' : 'black'} />
             </View>
           ),
         }}
@@ -145,7 +145,7 @@ function CounselorLayout({ navigation }) {
           tabBarIcon: ({ focused }) => {
             return (
               <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                <Icon name='columns' size={24} color={focused ? '#2dbfc5' : 'black'} />
+                <Icon name='columns' size={24} color={focused ? '#EFCD52' : 'black'} />
               </View>
             );
           },
@@ -156,21 +156,21 @@ function CounselorLayout({ navigation }) {
       <TabCounselor.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Icon name='history' size={24} color={focused ? '#2dbfc5' : 'black'} />
+            <Icon name='history' size={24} color={focused ? '#EFCD52' : 'black'} />
           </View>
         ),
       }} name='OrderHistory' component={OrderHistoryScreen} />
       <TabCounselor.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Icon name='bell' size={24} color={focused ? '#2dbfc5' : 'black'} />
+            <Icon name='bell' size={24} color={focused ? '#EFCD52' : 'black'} />
           </View>
         ),
       }} name='NotificationsList' component={NotificationsListScreen} />
       <TabCounselor.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Icon name='bars' size={24} color={focused ? '#2dbfc5' : 'black'} />
+            <Icon name='bars' size={24} color={focused ? '#EFCD52' : 'black'} />
           </View>
         ),
       }} name='MedicationsList' component={MedicationsListScreen} />
@@ -183,7 +183,7 @@ function CounselorLayout({ navigation }) {
               onPress={() => navigation.navigate('AddNewMedicine')}
               style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
             >
-              <Icon name='plus' size={24} color={focused ? '#2dbfc5' : 'black'} />
+              <Icon name='plus' size={24} color={focused ? '#EFCD52' : 'black'} />
             </TouchableOpacity>
           ),
         }}
