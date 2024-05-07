@@ -12,108 +12,69 @@ const NotificationsListScreen = () => {
   const [cartItems, setCartItems] = useState([]);
   const navigation = useNavigation();
 
-  const handleSaveChanges = async (itemId, num) => {
-    const db = getFirestore();
-    const docRef = doc(db, 'Order', itemId);
-  
-    // Update the document
-    try {
-      await updateDoc(docRef, {
-        ordered: num,
-        // Add more fields as needed
-      });
-      fetchCartItems();
-      console.log('Document successfully updated!');
-    } catch (error) {
-      console.error('Error updating document: ', error);
-    }
-  };
-
   useEffect(() => {
-    // Fetch cart items from Firebase when the component mounts
-    fetchCartItems();
+    fetchSessions();
   }, []);
+  
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchSessions();
+    }, [])
+  );
 
-  const fetchCartItems = async () => {
+  const fetchSessions = async () => {
+    const db = getFirestore();
+    const sessionRef = collection(db, 'sessions');
     try {
-      const db = getFirestore();
-      const q = query(
-        collection(db, 'Order'),
-        where('manufacturerId', '==', FIREBASE_AUTH.currentUser.uid),
-        where('ordered', 'in', [2])
-      );
+      const q = query(sessionRef, where('userId', '==', FIREBASE_AUTH.currentUser.uid));
       const querySnapshot = await getDocs(q);
-
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push({ id: doc.id, ...doc.data() });
-      });
-      setCartItems(items);
+      const sessions = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setCartItems(sessions);
     } catch (error) {
-      console.error('Error fetching cart items:', error.message);
+      console.error('Error fetching sessions:', error.message);
     }
   };
 
   const getStyleForValue = (value) => {
     let textStyle;
-
-    // Define styles based on the const value
-    if (value === 0) {
-      textStyle = styles.styleForValue0;
-    } else if (value === 1) {
-      textStyle = styles.styleForValue1;
-    } else{
-      textStyle = styles.styleForValue2;
+  
+    switch(value.toLowerCase()) {
+      case 'available':
+        textStyle = styles.styleForValue1;
+        break;
+      case 'not available':
+        textStyle = styles.styleForValue0;
+        break;
+      default:
+        textStyle = styles.styleForValue2;
     }
-
+  
     return textStyle;
   };
-
-  useFocusEffect(
-    React.useCallback(() => {
-      fetchCartItems();
-    }, [])
-  );
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <Text style={styles.title}>Notifications:</Text>
+        <Text style={styles.title}>Notifications</Text>
         {cartItems.length > 0 ? (
           <View style={{ flex: 1 }}>
-            <FlatList style={{ flex: 1 }}
-              data={cartItems}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <View style={getStyleForValue(item.ordered)}>
-                  <View style={{ flex: 1 }}>
-                    <View style={{ display: 'flex', flexDirection: 'row' }}>
-                      <Text style={{ fontWeight: 'bold' }}>Molecule : </Text>
-                      <Text>{item.moleculeName}</Text>
-                    </View>
-                    <View style={{ display: 'flex', flexDirection: 'row' }}>
-                      <Text style={{ fontWeight: 'bold' }}>Medicine : </Text>
-                      <Text>{item.medicineName}</Text>
-                    </View>
-                    <View style={{ display: 'flex', flexDirection: 'row' }}>
-                      <Text style={{ fontWeight: 'bold' }}>Quantity : </Text>
-                      <Text>{item.quantity}</Text>
-                    </View>
-                  </View>
-                  <View>
-                    <TouchableOpacity onPress={() => handleSaveChanges(item.id,1)} style={{ flex: 0.3, padding: 8, alignItems: 'center' }}>
-                      <Icon name="check-circle" size={20} color="green" />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleSaveChanges(item.id,0)} style={{ flex: 0.3, padding: 8, alignItems: 'center' }}>
-                      <Icon name="times-circle" size={20} color="red" />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              )}
-            />
+            <FlatList
+            data={cartItems}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <View style={[styles.cartItem, getStyleForValue(item.status)]}>
+                <Text style={{ fontWeight: 'bold' }}>Name: {item.name}</Text>
+                <Text style={{ fontWeight: 'bold' }}>Room: {item.room}</Text>
+                <Text>Status: {item.status}</Text>
+              </View>
+            )}
+          />
           </View>
         ) : (
-          <Text style={styles.emptyText}>You don't have any new notifications!</Text>
+          <Text style={styles.emptyText}>There is no notification</Text>
         )}
 
       </View>
@@ -124,66 +85,45 @@ const NotificationsListScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'start',
-    justifyContent: 'center',
+    alignItems: 'center',  // Adjust alignment to 'center'
+    justifyContent: 'flex-start',  // Start items from the top of the screen
     paddingHorizontal: 20,
-    paddingTop: 4
+    paddingTop: 20,  // Provide some padding at the top
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 20,  // Increase bottom margin to separate title from list
   },
   cartItem: {
     width: "100%",
     borderWidth: 1,
-    borderRadius: 20,
-    // borderColor: '#2dbfc5',
-    padding: 10,
-    marginVertical: 10,
-    display: 'flex',
+    borderRadius: 10,  // Adjusted for aesthetic preference
+    borderColor: '#ccc',  // Make border color consistent
+    padding: 15,
+    marginVertical: 8,
     flexDirection: 'row',
-    alignItems: 'center'
+    justifyContent: 'space-between',  // Distribute space between items
   },
-  styleForValue0:{
+  styleForValue0: {
+    backgroundColor: '#ffebee',  // Light red background for clarity
+    borderWidth: 1,
     borderColor: 'red',
-    width: "100%",
-    borderWidth: 1,
-    borderRadius: 20,
-    // borderColor: '#2dbfc5',
-    padding: 10,
-    marginVertical: 10,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
   },
-  styleForValue1:{
+  styleForValue1: {
+    backgroundColor: '#e8f5e9',  // Light green background for clarity
+    borderWidth: 1,
     borderColor: 'green',
-    width: "100%",
-    borderWidth: 1,
-    borderRadius: 20,
-    // borderColor: '#2dbfc5',
-    padding: 10,
-    marginVertical: 10,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
   },
-  styleForValue2:{
-    borderColor: 'orange',
-    width: "100%",
+  styleForValue2: {
+    backgroundColor: '#fff3e0',  // Light orange background for clarity
     borderWidth: 1,
-    borderRadius: 20,
-    // borderColor: '#2dbfc5',
-    padding: 10,
-    marginVertical: 10,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
+    borderColor: 'orange',
   },
   emptyText: {
-    fontSize: 16,
+    fontSize: 18,
     color: 'gray',
+    marginTop: 50,  // Center this text more in the view
   },
 });
 

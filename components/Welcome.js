@@ -63,15 +63,15 @@ const styles = StyleSheet.create({
     top: 30,
   },
   about: {
-    fontSize: 17,
-
+    fontSize: 19,
+    fontFamily: "Gill Sans",
   },
   aboutContent: {
-    marginTop: 40,
-    //fontFamily: ,
+    marginTop: 50,
+
   },
   title: {
-    color: '#90E0EF', // Text color for better readability
+    // Text color for better readability
     fontWeight: 'bold',
     fontSize: 30,
   },
@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingVertical: 80,
   },
   modalContent: {
     backgroundColor: 'white',
@@ -146,18 +147,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 8,
-    marginTop: 20,
+    marginTop: 15,
     alignItems: 'center',
     justifyContent: 'space-around',
     marginBottom: 30,
   },
   closeButtonText: {
-    color: '#03045E', // A deep ocean blue for strong contrast
+    color: 'white', // A deep ocean blue for strong contrast
     fontWeight: 'bold', // Make text stand out
     fontSize: 18, // Sufficient size for easy readability
     textAlign: 'center', // Center the text for aesthetics
     padding: 10, // Add some padding for touchability
-    backgroundColor: '#90E0EF', // A softer, lighter blue for the button background
+    backgroundColor: 'black', // A softer, lighter blue for the button background
     borderRadius: 20, // Rounded corners for a modern, friendly look
     overflow: 'hidden', // Ensure the background doesn't bleed outside the border radius
     marginTop: 20, // Space from the top for better layout

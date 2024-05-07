@@ -25,7 +25,7 @@ const Login = () => {
 
     return (
         <KeyboardAvoidingView behavior="padding" style={styles.Allcontainer}>
-            <Image style={styles.logo} source={require("../assets/counseling_icon.png")} />
+            <Image style={styles.logo} source={require("../assets/login.png")} />
             <View style={styles.container}>
                 <TextInput value={email} onChangeText={setEmail} placeholder='Email' style={styles.input} />
                 <TextInput value={password} onChangeText={setPassword} placeholder='Password' secureTextEntry style={styles.input} />
@@ -47,12 +47,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f5f5f5', // Soft background color
+        backgroundColor: 'white', // Soft background color
     },
     logo: {
         width: window.width * 0.3, // Responsive width
         height: window.width * 0.3, // Responsive height, maintain aspect ratio
-        marginBottom: 20,
+        marginBottom: 50,
     },
     container: {
         width: '80%',

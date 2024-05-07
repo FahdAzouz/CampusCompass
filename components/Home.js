@@ -163,13 +163,6 @@ function CounselorLayout({ navigation }) {
       <TabCounselor.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Icon name='bell' size={24} color={focused ? '#EFCD52' : 'black'} />
-          </View>
-        ),
-      }} name='NotificationsList' component={NotificationsListScreen} />
-      <TabCounselor.Screen options={{
-        tabBarIcon: ({ focused }) => (
-          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
             <Icon name='bars' size={24} color={focused ? '#EFCD52' : 'black'} />
           </View>
         ),

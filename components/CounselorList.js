@@ -45,7 +45,7 @@ const CounselorList = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Edit Profile</Text>
+      <Text style={styles.title}>Counselor List</Text>
       <View style={styles.tableHeader}>
         <Text style={styles.headerText}>Counselor Name</Text>
         <Text style={styles.headerText}>Room</Text>

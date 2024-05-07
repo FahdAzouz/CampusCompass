@@ -1,96 +1,90 @@
+// NotificationsList.js
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { getFirestore, collection, getDocs, query, where, doc, deleteDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, query, deleteDoc, doc } from 'firebase/firestore';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { FIREBASE_AUTH, FIREBASE_DB } from '../../firebase';
-import { useFocusEffect } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 const NotificationsList = () => {
   const [cartItems, setCartItems] = useState([]);
-  const navigation = useNavigation();
 
   useEffect(() => {
-    // Fetch cart items from Firebase when the component mounts
-    fetchCartItems();
+    fetchSessions();
   }, []);
 
-  useFocusEffect(
-    React.useCallback(() => {
-      fetchCartItems();
-    }, [])
-  );
-
-  const fetchCartItems = async () => {
+  const fetchSessions = async () => {
+    const db = getFirestore();
+    const sessionRef = collection(db, 'sessions');
     try {
-      const db = getFirestore();
-      const q = query(
-        collection(db, 'Order'),
-        where('pharmacistId', '==', FIREBASE_AUTH.currentUser.uid),
-        where('ordered', 'in', [0, 1])
-      );
+      const q = query(sessionRef);
       const querySnapshot = await getDocs(q);
-
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push({ id: doc.id, ...doc.data() });
-      });
-      setCartItems(items);
+      const sessions = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+        isAccepted: false  // Add a flag to track if a notification is accepted
+      }));
+      setCartItems(sessions);
     } catch (error) {
-      console.error('Error fetching cart items:', error.message);
+      console.error('Error fetching sessions:', error.message);
     }
   };
 
-  const getStyleForValue = (value) => {
-    let textStyle;
-
-    // Define styles based on the const value
-    if (value === 0) {
-      textStyle = styles.styleForValue0;
-    } else if (value === 1) {
-      textStyle = styles.styleForValue1;
-    } else{
-      textStyle = styles.styleForValue2;
-    }
-
-    return textStyle;
+  const handleDelete = async (id) => {
+    // Implement deletion logic here
+    const db = getFirestore();
+    const docRef = doc(db, 'sessions', id);
+    await deleteDoc(docRef);
+    setCartItems(prevItems => prevItems.filter(item => item.id !== id));
   };
+
+  const handleAccept = (id) => {
+    // Update local state to mark the item as accepted
+    setCartItems(prevItems => prevItems.map(item => {
+      if (item.id === id) {
+        return { ...item, isAccepted: true };
+      }
+      return item;
+    }));
+  };
+
+  const getStyleForValue = (status) => {
+    switch(status.toLowerCase()) {
+      case 'available':
+        return styles.available;
+      case 'unavailable':
+        return styles.unavailable;
+      default:
+        return {};
+    }
+  };
+
+  const renderItem = ({ item }) => (
+    <View style={[styles.cartItem, getStyleForValue(item.status)]}>
+      <View style={styles.itemInfo}>
+        <Text style={styles.itemText}>Name: {item.name}</Text>
+        <Text style={styles.itemText}>Room: {item.room}</Text>
+        <Text style={styles.itemText}>Status: {item.status}</Text>
+      </View>
+      {!item.isAccepted && (
+        <View style={styles.actions}>
+          <TouchableOpacity style={styles.buttonAccept} onPress={() => handleAccept(item.id)}>
+            <Text style={styles.buttonText}>Accept</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonDelete} onPress={() => handleDelete(item.id)}>
+            <Text style={styles.buttonText}>Delete</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  );
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Notifications</Text>
-        {cartItems.length > 0 ? (
-          <View style={{ flex: 1 }}>
-            <FlatList style={{ flex: 1 }}
-              data={cartItems}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <View style={getStyleForValue(item.ordered)}>
-                  <View style={{ flex: 1 }}>
-                    <View style={{ display: 'flex', flexDirection: 'row' }}>
-                      <Text style={{ fontWeight: 'bold' }}>Molecule : </Text>
-                      <Text>{item.moleculeName}</Text>
-                    </View>
-                    <View style={{ display: 'flex', flexDirection: 'row' }}>
-                      <Text style={{ fontWeight: 'bold' }}>Medicine : </Text>
-                      <Text>{item.medicineName}</Text>
-                    </View>
-                    <View style={{ display: 'flex', flexDirection: 'row' }}>
-                      <Text style={{ fontWeight: 'bold' }}>Quantity : </Text>
-                      <Text>{item.quantity}</Text>
-                    </View>
-                  </View>
-                </View>
-              )}
-            />
-          </View>
-        ) : (
-          <Text style={styles.emptyText}>There is no notification</Text>
-        )}
-
-      </View>
+      <Text style={styles.title}>Notifications</Text>
+      <FlatList
+        data={cartItems}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+      />
     </SafeAreaView>
   );
 };
@@ -98,66 +92,61 @@ const NotificationsList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'start',
-    justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
     paddingHorizontal: 20,
-    paddingTop: 4
+    paddingTop: 20,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 20,
   },
   cartItem: {
-    width: "100%",
-    borderWidth: 1,
-    borderRadius: 20,
-    // borderColor: '#2dbfc5',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 10,
-    marginVertical: 10,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  styleForValue0:{
-    borderColor: 'red',
-    width: "100%",
+    marginVertical: 8,
     borderWidth: 1,
-    borderRadius: 20,
-    // borderColor: '#2dbfc5',
-    padding: 10,
-    marginVertical: 10,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
+    borderRadius: 10,
+    borderColor: '#ccc',
+    backgroundColor: '#f9f9f9',
   },
-  styleForValue1:{
-    borderColor: 'green',
-    width: "100%",
-    borderWidth: 1,
-    borderRadius: 20,
-    // borderColor: '#2dbfc5',
-    padding: 10,
-    marginVertical: 10,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
+  itemInfo: {
+    flex: 3,
   },
-  styleForValue2:{
-    borderColor: 'orange',
-    width: "100%",
-    borderWidth: 1,
-    borderRadius: 20,
-    // borderColor: '#2dbfc5',
-    padding: 10,
-    marginVertical: 10,
-    display: 'flex',
+  actions: {
+    flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    justifyContent: 'space-between',
   },
-  emptyText: {
+  itemText: {
     fontSize: 16,
-    color: 'gray',
+  },
+  buttonAccept: {
+    backgroundColor: '#EFCD52',
+    padding: 10,
+    borderRadius: 5,
+    marginHorizontal: 5,
+    marginTop: 10,
+  },
+  buttonDelete: {
+    backgroundColor: 'red',
+    padding: 10,
+    borderRadius: 5,
+    marginHorizontal: 5,
+    marginTop: 10,
+  },
+  buttonText: {
+    color: 'white',
+    marginLeft: 'auto',
+  },
+  available: {
+    backgroundColor: '#e8f5e9', // light green
+  },
+  unavailable: {
+    backgroundColor: '#ffebee', // light red
   },
 });
 

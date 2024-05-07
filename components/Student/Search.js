@@ -16,7 +16,7 @@ const SearchPage = () => {
       setSearchResults([]);
       return;
     }
-  
+
     try {
       const db = getFirestore();
       const sessionRef = collection(db, 'sessions');
@@ -25,13 +25,13 @@ const SearchPage = () => {
         where('name_lower', '>=', searchQuery.trim().toLowerCase()),
         where('name_lower', '<=', searchQuery.trim().toLowerCase() + '\uf8ff')
       );
-  
+
       const querySnapshot = await getDocs(q);
       const results = querySnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       }));
-  
+
       setSearchResults(results);
     } catch (error) {
       console.error('Error searching sessions:', error.message);
@@ -49,7 +49,7 @@ const SearchPage = () => {
       if (searchQuery) searchSessions();
     }, [searchQuery])
   );
-  
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -69,6 +69,7 @@ const SearchPage = () => {
       </View>
 
       <FlatList
+        style={styles.resultsContainer}
         data={searchResults}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
