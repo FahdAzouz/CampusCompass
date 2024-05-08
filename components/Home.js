@@ -23,6 +23,7 @@ import CurrentBooking from './Student/CurrentBooking';
 import { TouchableOpacity, ScrollView } from 'react-native';
 import AddNewSessionScreen from './Counselor/AddNewSessionScreen';
 import CounselorList from './CounselorList';
+import TimeSlotsScreen from './Student/TimeSlots';
 
 const Tab = createBottomTabNavigator()
 const TabStudent = createBottomTabNavigator()
@@ -88,7 +89,7 @@ function StudentLayout() {
           </View>
         ),
       }} name='OrderHistory' component={OrderHistoryScreen} />
-    
+
       <TabStudent.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -103,6 +104,7 @@ function StudentLayout() {
           </View>
         ),
       }} name='NotificationsList' component={NotificationsList} />
+      <TabStudent.Screen name="TimeSlotsScreen" component={TimeSlotsScreen} />
       <TabStudent.Screen options={{
         tabBarIcon: ({ focused }) => (
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
@@ -168,12 +170,12 @@ function CounselorLayout({ navigation }) {
         ),
       }} name='MedicationsList' component={MedicationsListScreen} />
       <TabCounselor.Screen
-        name='AddNewMedicine'
+        name='AddNewSession'
         component={AddNewSessionScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <TouchableOpacity
-              onPress={() => navigation.navigate('AddNewMedicine')}
+              onPress={() => navigation.navigate('AddNewSession')}
               style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
             >
               <Icon name='plus' size={24} color={focused ? '#EFCD52' : 'black'} />

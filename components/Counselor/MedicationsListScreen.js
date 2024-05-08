@@ -60,11 +60,6 @@ const MedicationsListScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={() => { navigation.navigate('AddNewSessionScreen') }} style={styles.addButton}>
-        <Icon name="plus" size={20} color="white" />
-        <Text style={{ color: 'white', fontWeight: 'bold' }}>Add a session</Text>
-      </TouchableOpacity>
-
       <Text style={styles.title}>Your Session List</Text>
       <View style={styles.tableHeader}>
         <Text style={styles.tableCell}>Student Name</Text>

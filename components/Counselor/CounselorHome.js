@@ -68,11 +68,6 @@ const CounselorHome = ({ navigation }) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => navigation.navigate('NotificationsList')}>
-              <Text style={styles.buttonText}>Notifications List</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.button}
               onPress={() => navigation.navigate('MedicationsList')}>
               <Text style={styles.buttonText}>Session List</Text>
             </TouchableOpacity>

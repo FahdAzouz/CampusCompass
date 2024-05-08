@@ -62,7 +62,7 @@ const StudentHome = ({ navigation }) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => navigation.navigate('Cart')}>
+              onPress={() => navigation.navigate('CurrentBooking')}>
               <Text style={styles.buttonText}>Booking History</Text>
             </TouchableOpacity>
             <TouchableOpacity

@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { FIREBASE_AUTH } from '../firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
+import Toast from 'react-native-toast-message';
 
 const window = Dimensions.get("window");
 
@@ -25,6 +26,7 @@ const Login = () => {
 
     return (
         <KeyboardAvoidingView behavior="padding" style={styles.Allcontainer}>
+            <Toast ref={(ref) => Toast.setRef(ref)} />
             <Image style={styles.logo} source={require("../assets/login.png")} />
             <View style={styles.container}>
                 <TextInput value={email} onChangeText={setEmail} placeholder='Email' style={styles.input} />

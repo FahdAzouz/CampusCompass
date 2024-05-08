@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { getFirestore, collection, getDocs, query, deleteDoc, doc } from 'firebase/firestore';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
 
 const NotificationsList = () => {
   const [cartItems, setCartItems] = useState([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
     fetchSessions();
@@ -27,6 +29,7 @@ const NotificationsList = () => {
       console.error('Error fetching sessions:', error.message);
     }
   };
+  
 
   const handleDelete = async (id) => {
     // Implement deletion logic here
@@ -38,6 +41,7 @@ const NotificationsList = () => {
 
   const handleAccept = (id) => {
     // Update local state to mark the item as accepted
+    navigation.navigate('TimeSlotsScreen', { sessionId: id });
     setCartItems(prevItems => prevItems.map(item => {
       if (item.id === id) {
         return { ...item, isAccepted: true };

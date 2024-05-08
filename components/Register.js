@@ -7,6 +7,7 @@ import { doc, setDoc } from 'firebase/firestore';
 import { FIREBASE_AUTH, FIREBASE_DB } from '../firebase';
 import Toast from 'react-native-toast-message';
 
+
 const Register = () => {
   const db = FIREBASE_DB;
   const [email, setEmail] = useState('');
@@ -19,8 +20,13 @@ const Register = () => {
   const navigation = useNavigation();
 
   const signUp = async () => {
+    
+    const showToast = (message) => {
+      Toast.show({ type: 'error', text1: message });
+    };
+    
     if (password !== confirmPassword) {
-      Toast.show({ type: 'error', text1: 'Passwords do not match!' });
+      showToast('Passwords do not match!');
       return;
     }
 
@@ -48,13 +54,11 @@ const Register = () => {
     }
   };
 
-  const showToast = (message) => {
-    Toast.show({ type: 'error', text1: message });
-  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image style={styles.logo} source={require('../assets/register-user.png')} />
+      <Toast ref={(ref) => Toast.setRef(ref)} />
       <View style={styles.inputContainer}>
         <TextInput
           value={fullName}

@@ -19,8 +19,20 @@ const AddNewSessionScreen = () => {
 
   const user = FIREBASE_AUTH.currentUser;
 
+  const initializeTimeSlots = async (sessionId) => {
+    const db = getFirestore();
+    const timeSlotsCollection = collection(db, 'available_time', sessionId, 'slots');
+    const hours = Array.from({ length: 10 }, (_, i) => 8 + i); // from 8 AM to 6 PM
+  
+    await Promise.all(hours.map(hour => {
+      return addDoc(timeSlotsCollection, {
+        time: `${hour}:00`,  // Example: "8:00"
+        available: true
+      });
+    }));
+  };
 
-  const addNewMedicine = async () => {
+  const AddNewSession = async () => {
     if (name.trim() === '') {
       ToastAndroid.show('Medecine name is required!', ToastAndroid.SHORT);
       return;
@@ -36,7 +48,7 @@ const AddNewSessionScreen = () => {
     try {
       const db = getFirestore();
       const sessionCollection = collection(db, 'sessions');
-      await addDoc(sessionCollection, {
+      const docRef = await addDoc(sessionCollection, {
         name: name,  // Original name for display
         name_lower: name.toLowerCase(),  // Lowercase name for searching
         date,
@@ -44,7 +56,8 @@ const AddNewSessionScreen = () => {
         status: selectedAvailability,
         userId: user.uid,
       });
-      navigation.navigate('MedicationsList')
+      await initializeTimeSlots(docRef.id);
+      navigation.navigate('CounselorList')
       Alert.alert('Success', 'New session added successfully');
     } catch (error) {
       console.error('Error adding new medicine:', error.message);
@@ -70,7 +83,7 @@ const AddNewSessionScreen = () => {
             </Picker>
           </View>
 
-          <TouchableOpacity style={styles.button} onPress={addNewMedicine}>
+          <TouchableOpacity style={styles.button} onPress={AddNewSession}>
             <Text style={styles.buttonText}>Add Session</Text>
           </TouchableOpacity>
         </View>

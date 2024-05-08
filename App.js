@@ -15,6 +15,7 @@ import MedicationsListScreen from './components/Counselor/MedicationsListScreen'
 import AddNewSessionScreen from './components/Counselor/AddNewSessionScreen';
 import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';
+import TimeSlotsScreen from './components/Student/TimeSlots';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,7 +29,7 @@ function InsideLayout() {
       <insideStack.Screen options={{ headerShown: false }} name="Home" component={Home} />
       <insideStack.Screen options={{ headerShown: false }} name="Profile" component={Profile} />
       <insideStack.Screen options={{ headerShown: false }} name="EditProfile" component={EditProfile} />
-      <insideStack.Screen options={{ headerShown: false }} name="AddNewMedicine" component={AddNewSessionScreen} />
+      <insideStack.Screen options={{ headerShown: false }} name="AddNewSession" component={AddNewSessionScreen} />
     </insideStack.Navigator>
   );
 }
