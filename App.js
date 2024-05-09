@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH, FIREBASE_APP } from './firebase';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
-import MedicationsListScreen from './components/Counselor/MedicationsListScreen';
+import SessionListScreen from './components/Counselor/SessionListScreen';
 import AddNewSessionScreen from './components/Counselor/AddNewSessionScreen';
 import Profile from './components/Profile';
 import EditProfile from './components/EditProfile';

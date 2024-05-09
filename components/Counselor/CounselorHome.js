@@ -63,6 +63,11 @@ const CounselorHome = ({ navigation }) => {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.button}
+              onPress={() => navigation.navigate('AddNewSession')}>
+              <Text style={styles.buttonText}>Add Session</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
               onPress={() => navigation.navigate('OrderHistory')}>
               <Text style={styles.buttonText}>Booking History</Text>
             </TouchableOpacity>

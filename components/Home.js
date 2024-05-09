@@ -15,7 +15,7 @@ import Profile from './Profile';
 import EditProfile from './EditProfile'
 import OrderHistoryScreen from './Counselor/OrderHistoryScreen';
 import NotificationsListScreen from './Counselor/NotificationsListScreen';
-import MedicationsListScreen from './Counselor/MedicationsListScreen';
+import SessionListScreen from './Counselor/SessionListScreen';
 import MakeOrderPage from './Student/MakeOrderPage';
 import NotificationsList from './Student/NotificationsList';
 import Search from './Student/Search';
@@ -168,7 +168,7 @@ function CounselorLayout({ navigation }) {
             <Icon name='bars' size={24} color={focused ? '#EFCD52' : 'black'} />
           </View>
         ),
-      }} name='MedicationsList' component={MedicationsListScreen} />
+      }} name='MedicationsList' component={SessionListScreen} />
       <TabCounselor.Screen
         name='AddNewSession'
         component={AddNewSessionScreen}
