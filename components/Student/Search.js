@@ -50,7 +50,7 @@ const SearchPage = () => {
     }, [searchQuery])
   );
 
-
+  
   return (
     <SafeAreaView style={styles.container}>
       <Image style={styles.image} source={require("../../assets/search.png")} />
@@ -67,21 +67,27 @@ const SearchPage = () => {
           <Text style={styles.buttonText}>Search</Text>
         </TouchableOpacity>
       </View>
-
+    
       <FlatList
-        style={styles.resultsContainer}
         data={searchResults}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.resultRow}>
             <Text style={styles.resultText}>{item.name}</Text>
             <Text style={styles.resultText}>{item.room}</Text>
+            <TouchableOpacity
+              style={styles.slotButton}
+              onPress={() => navigation.navigate('TimeSlotsScreen', { sessionId: item.id })}
+            >
+              <Text style={styles.buttonText}>View Slots</Text>
+            </TouchableOpacity>
           </View>
         )}
         ListHeaderComponent={() => (
           <View style={styles.headerRow}>
             <Text style={styles.headerText}>Counselor Name</Text>
             <Text style={styles.headerText}>Office</Text>
+            <Text style={styles.headerText}>Actions</Text>
           </View>
         )}
       />
@@ -90,6 +96,18 @@ const SearchPage = () => {
 }
 
 const styles = StyleSheet.create({
+  slotButton: {
+    padding: 10,
+    backgroundColor: '#416285',
+    borderRadius: 5,
+  },
+  
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
   container: {
     flex: 1,
     alignItems: 'center',
@@ -123,7 +141,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: "center",
     gap: 10
   },
@@ -140,28 +157,34 @@ const styles = StyleSheet.create({
     marginTop: -70
   },
   resultRow: {
-    flexDirection: 'row',
+    //flexDirection: 'row',
     justifyContent: 'space-between',
-    borderBottomWidth: 1,
+    alignItems: 'center',
+    borderBottomWidth: 5,
     borderBottomColor: '#ccc',
-    paddingVertical: 18,
+    padding: 10,
+    paddingHorizontal: 100,
   },
+  resultText: {
+    flex: 1,  // Adjust the flex value as needed to match the header
+    textAlign: 'center',
+    marginBottom: 5,
+    fontSize: 15,
+  },
+  
   headerRow: {
     flexDirection: 'row',
-    //justifyContent: 'space-between',
+    justifyContent: 'space-between',
     borderBottomWidth: 2,
     borderBottomColor: '#416285',
-    paddingVertical: 18,
+    padding: 10,
   },
   headerText: {
     flex: 1,
     color: '#416285',
     fontWeight: 'bold',
     justifyContent: 'space-around',
-  },
-  resultText: {
-    flex: 1,
-    textAlignVertical: 'center'
+    textAlign: 'center',
   },
   actionsContainer: {
     flexDirection: 'column',

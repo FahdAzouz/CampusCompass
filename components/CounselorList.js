@@ -64,12 +64,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff',  // Main background remains white
   },
   tableHeader: {
     flexDirection: 'row',
     padding: 10,
-    backgroundColor: '#f4f4f8',
+    backgroundColor: '#EFCD52',  // Deep blue header background
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderTopColor: '#ccc',
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontWeight: 'bold',
     textTransform: 'uppercase',
-    color: '#555',
+    color: '#4756ca',  // Sunny yellow text for headers
     fontSize: 16,
     textAlign: 'center',
   },
@@ -88,12 +88,13 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
+    backgroundColor: '#f9f9f9',  // Slightly off-white rows for better readability
   },
   cell: {
     flex: 1,
     fontSize: 16,
     textAlign: 'center',
-    color: '#416285',
+    color: '#4756ca',  // Deep blue text for cell data
   },
   title: {
     fontSize: 24,
@@ -101,6 +102,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 30,
     paddingHorizontal: 20,
+    color: '#EFCD52',  // Deep blue for the title
   },
 });
 

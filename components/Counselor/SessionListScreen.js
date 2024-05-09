@@ -16,9 +16,9 @@ const SessionListScreen = () => {
     const db = getFirestore();
     const counselorId = FIREBASE_AUTH.currentUser.uid;
     const slotsCollectionPath = `available_time/${counselorId}/slots`;
-
     try {
-        const querySnapshot = await getDocs(collection(db, slotsCollectionPath));  // Fetch all documents from the slots subcollection
+        const querySnapshot = await getDocs(collection(db, slotsCollectionPath));
+        console.log(querySnapshot);  // Fetch all documents from the slots subcollection
         const slotsData = querySnapshot.docs.map(doc => ({
             ...doc.data(),
             id: doc.id,
